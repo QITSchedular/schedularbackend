@@ -77,52 +77,62 @@ class CalendarController extends Controller
 
         return $response;
     }
-    private function scheduleMeeting($accessToken)
+    private function scheduleMeeting( $config)
     {
-        $apiEndpoint = 'https://graph.microsoft.com/v1.0/users/'.$this->userPrincipalName.'/calendar/events';
-
-        $headers = [
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer '.$accessToken,
-        ];
-        $reqbody = [
-            "subject" => "Business Discussion",
-            "body" => [
-                "contentType" => "HTML",
-                "content" => "Please Confrim the joining status of the meeting.."
-            ],
-            "start" => [
-                "dateTime" => "2023-03-11T12:00:00",
-                "timeZone" => "India Standard Time"
-            ],
-            "end" => [
-                "dateTime" => "2023-03-11T13:00:00",
-                "timeZone" => "India Standard Time"
-            ],
-            "location" => [
-                "displayName" => "Online Teams Meeting"
-            ],
-            "attendees" => [
-                [
-                    "emailAddress" => [
-                        "address" => "ravi.shrma@zohomail.in",
-                        "name" => "Ravi Sharma"
-                    ],
-                    "type" => "required"
-                ]
-            ],
-            "isOnlineMeeting" => true,
-            "onlineMeetingProvider" => "teamsForBusiness"
-        ];
+        // first get the token:
+        // $url = "https://login.microsoftonline.com/{$this->tenantId}/oauth2/v2.0/token";
         
-        //$reqBodyJson = json_encode($reqbody);
+        // $response = Http::asForm()->post($url, [
+        //     'client_id' => $this->clientId,
+        //     'client_secret' => $this->clientSecret,
+        //     'grant_type' => $this->grantType,
+        //     'scope' => $this->scope,
+        // ]);
+        
+        // $data = $response->json();
+        // $accessToken = $data['access_token'];
+
+        // $apiEndpoint = 'https://graph.microsoft.com/v1.0/users/'.$this->userPrincipalName.'/calendar/events';
+
+        // $headers = [
+        //     'Content-Type' => 'application/json',
+        //     'Authorization' => 'Bearer '.$accessToken,
+        // ];
+        // $reqbody = [
+        //     "subject" => "Business Discussion",
+        //     "body" => [
+        //         "contentType" => "HTML",
+        //         "content" => "Please Confrim the joining status of the meeting.."
+        //     ],
+        //     "start" => [
+        //         "dateTime" => "2023-03-11T12:00:00",
+        //         "timeZone" => "India Standard Time"
+        //     ],
+        //     "end" => [
+        //         "dateTime" => "2023-03-11T13:00:00",
+        //         "timeZone" => "India Standard Time"
+        //     ],
+        //     "location" => [
+        //         "displayName" => "Online Teams Meeting"
+        //     ],
+        //     "attendees" => [
+        //         [
+        //             "emailAddress" => [
+        //                 "address" => "ravi.shrma@zohomail.in",
+        //                 "name" => "Ravi Sharma"
+        //             ],
+        //             "type" => "required"
+        //         ]
+        //     ],
+        //     "isOnlineMeeting" => true,
+        //     "onlineMeetingProvider" => "teamsForBusiness"
+        // ];
+        
+        // //$reqBodyJson = json_encode($reqbody);
          
 
-        $response = Http::withHeaders($headers)->post($apiEndpoint, $reqbody);
-
-        $data = $response->json();
-
-        return $data;
+        // $response = Http::withHeaders($headers)->post($apiEndpoint, $reqbody);
+            dd($config);
     }
 
     //STEP 1
